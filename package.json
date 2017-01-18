@@ -1,0 +1,31 @@
+{
+  "name": "hash-set",
+  "version": "1.0.0",
+  "description": "Very fast linear probing hash table implementation in pure JS",
+  "main": "hash-set.js",
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zheksoon/HashSet.git"
+  },
+  "keywords": [
+    "hash",
+    "hash table",
+    "hashtable",
+    "hash set",
+    "set",
+    "hashset",
+    "linear probing"
+  ],
+  "author": "Eugene Daragan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zheksoon/HashSet/issues"
+  },
+  "homepage": "https://github.com/zheksoon/HashSet#readme",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
