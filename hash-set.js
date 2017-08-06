@@ -159,23 +159,19 @@ HashSet.prototype.remove = function(item, avoidRehash) {
     var items = this._items;
     var length = items.length - 1;
     var hash = item._hash & length;
-    var moveHash, moveItem;
     // find element
     while (items[hash] !== undefined && items[hash] !== item) {
         hash = (hash + 1) & length;
     }
     if (items[hash] !== undefined) {
-        items[hash] = undefined;
-        // restore linear probing sequence rules, read wikipedia for details
-        moveHash = (hash + 1) & length;
-        while ((moveItem = items[moveHash]) !== undefined) {      
-            if (((moveHash - moveItem._hash) & length) >= ((moveHash - hash) & length)) {
-                items[hash] = moveItem;
-                items[moveHash] = undefined;
-                hash = moveHash;
-            }
-            moveHash = (moveHash + 1) & length;
+        // robin-hood strategy
+        var moveItem = undefined;
+        var moveHash = (hash + 1) & modulo;
+        while (items[moveHash] !== undefined) {
+            moveItem = items[moveHash];
+            moveHash = (moveHash + 1) & modulo;
         }
+        items[hash] = moveItem;
         this._size--;
         
         // rehash table if allowed
